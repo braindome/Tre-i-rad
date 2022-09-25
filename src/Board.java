@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class Board {
-    int boardSize;
+    //Board design: list of 10 chars. 3x3 grid numbered from 1 to 9 left to right, from top row to bottom.
+    //Position number index starting at 1 for ease of coding.
     char[] positionNumber = new char[10];
 
     public Board() {
