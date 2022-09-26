@@ -4,9 +4,9 @@ public class Main {
         Game game = new Game();
         Player player1 = new Player();
         Player player2 = new Player();
+        Player[] players = {player1, player2};
 
 
-        //board.printBoard();
         player1.createPlayerX(player1);
         player2.createPlayerO(player2);
 
@@ -14,7 +14,8 @@ public class Main {
         System.out.println(player1.toString());
         System.out.println(player2.toString());
         System.out.println("Let the game begin!");
-        board.printBoard();
+        game.randomPlayerStart(players);
+        board.resetBoard();
 
         board.positionNumber[1] = 'O';
         board.positionNumber[2] = 'X';

@@ -1,11 +1,32 @@
-public class Game {
+import java.util.Random;
+import java.util.Scanner;
 
+public class Game {
+    Random random = new Random();
+    Scanner scan = new Scanner(System.in);
     public Game() {
 
     }
 
     public void play() {
+        System.out.println();
+    }
 
+    public void selectPosition(Board board) {
+        System.out.println("Select a position.");
+        int p = scan.nextInt();
+        if (p < 1 || p >= 10) {
+            System.out.println("Position is invalid. Select another location.");
+        } else if (board.positionNumber[p] == 'O' || board.positionNumber[p] == 'X') {
+            System.out.println("Position is taken; please select another location.");
+        } else {
+            System.out.println("Position " + p + " selected.");
+        }
+    }
+
+    public void randomPlayerStart(Player[] players) {
+        int plNum = random.nextInt(2);
+        System.out.println(players[plNum].name + " starts the game.");
     }
 
     //Checks for winning conditions. Three rows, three columns and two diagonals containing the same symbol.
