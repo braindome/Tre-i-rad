@@ -13,27 +13,34 @@ public class Main {
 
         System.out.println(player1.toString());
         System.out.println(player2.toString());
+
+
         System.out.println("Let the game begin!");
-        game.randomPlayerStart(players);
+
+        board.printInstructions();
+        board.printPositions();
         board.resetBoard();
 
-        board.positionNumber[1] = 'O';
-        board.positionNumber[2] = 'X';
-        board.positionNumber[3] = 'O';
-        board.positionNumber[4] = 'O';
-        board.positionNumber[5] = 'X';
-        board.positionNumber[6] = 'X';
-        board.positionNumber[7] = 'X';
-        board.positionNumber[8] = 'O';
-        board.positionNumber[9] = 'X';
+        game.randomPlayerStart(players);
+        game.checkTurn(player1, player2);
+        board.printBoard();
+        game.winCondition(board, player1, player2);
+
+
+//        board.positionNumber[1] = 'O';
+//        board.positionNumber[2] = 'X';
+//        board.positionNumber[3] = 'O';
+//        board.positionNumber[4] = 'O';
+//        board.positionNumber[5] = 'X';
+//        board.positionNumber[6] = 'X';
+//        board.positionNumber[7] = 'X';
+//        board.positionNumber[8] = 'O';
+//        board.positionNumber[9] = 'X';
 
 //        board.positionNumber[1] = 'X';
 //        board.positionNumber[2] = 'X';
 //        board.positionNumber[3] = 'X';
 
-
-        board.printBoard();
-        game.winCondition(board, player1, player2);
 
     }
 }

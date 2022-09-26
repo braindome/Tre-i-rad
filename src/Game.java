@@ -2,31 +2,70 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+
+    Board board = new Board();
     Random random = new Random();
     Scanner scan = new Scanner(System.in);
+    char turn = ' ';
     public Game() {
 
     }
 
-    public void play() {
-        System.out.println();
-    }
+    public void play1(Player player1) {
 
-    public void selectPosition(Board board) {
-        System.out.println("Select a position.");
-        int p = scan.nextInt();
-        if (p < 1 || p >= 10) {
-            System.out.println("Position is invalid. Select another location.");
-        } else if (board.positionNumber[p] == 'O' || board.positionNumber[p] == 'X') {
+        System.out.println(player1 + " , it's your turn.");
+        int input = scan.nextInt();
+        if (input > 0 && input <= 9) {
+            board.positionNumber[input] = 'X';
+        } else if (board.positionNumber[input] == 'O' || board.positionNumber[input] == 'X') {
             System.out.println("Position is taken; please select another location.");
         } else {
-            System.out.println("Position " + p + " selected.");
+            System.out.println("Input not accepted. Please insert a number between 1 and 9.");
         }
     }
+
+    public void play2(Player player2) {
+
+        System.out.println(player2 + " , it's your turn.");
+        int input = scan.nextInt();
+        if (input > 0 && input <= 9) {
+            board.positionNumber[input] = 'O';
+
+        } else if (board.positionNumber[input] == 'O' || board.positionNumber[input] == 'X') {
+            System.out.println("Position is taken; please select another location.");
+        } else {
+            System.out.println("Input not accepted. Please insert a number between 1 and 9.");
+        }
+    }
+
+//    public void selectPosition(Board board) {
+//        System.out.println("Select a position.");
+//        int p = scan.nextInt();
+//        if (p < 1 || p >= 10) {
+//            System.out.println("Position is invalid. Select another location.");
+//        } else if (board.positionNumber[p] == 'O' || board.positionNumber[p] == 'X') {
+//            System.out.println("Position is taken; please select another location.");
+//        } else {
+//            System.out.println("Position " + p + " selected.");
+//        }
+//    }
 
     public void randomPlayerStart(Player[] players) {
         int plNum = random.nextInt(2);
         System.out.println(players[plNum].name + " starts the game.");
+        turn = players[plNum].symbol;
+    }
+
+    public void checkTurn(Player player1, Player player2) {
+        if (turn == 'X') {
+            System.out.println(player2 + " , make a move.");
+            play2(player2);
+            turn = 'O';
+        } else if (turn == 'O') {
+            System.out.println(player1 + " , make a move.");
+            play1(player1);
+            turn = 'X';
+        }
     }
 
     //Checks for winning conditions. Three rows, three columns and two diagonals containing the same symbol.
@@ -58,7 +97,6 @@ public class Game {
         } else if (winner == 'X') {
             System.out.println(player1.name + " wins this game.");
 
-
         }
         //If no rows, no columns or no diagonals contain X or O, start a loop though all the positions of the board and check if they have valid value.
         //If all values are valid (aka X or O), it means the board is full and the game is therefore a draw.
@@ -66,6 +104,7 @@ public class Game {
             for (int i = 1; i <= 9; i++) {
                 if (board.positionNumber[i] == 'X' || board.positionNumber[i] == 'O') {
                     if (i==9) {
+                        winner = 'N';
                         System.out.println("Game is a draw");
                         break;
                     }
