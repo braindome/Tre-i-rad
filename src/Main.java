@@ -7,12 +7,12 @@ public class Main {
         Player[] players = {player1, player2};
 
 
-        player1.createPlayerX(player1);
-        player2.createPlayerO(player2);
+        player1.createPlayerX();
+        player2.createPlayerO();
 
 
-        System.out.println(player1.toString());
-        System.out.println(player2.toString());
+        System.out.println(player1);
+        System.out.println(player2);
 
 
         System.out.println("Let the game begin!");
@@ -22,9 +22,10 @@ public class Main {
         board.resetBoard();
 
         game.randomPlayerStart(players);
-        game.checkTurn(player1, player2);
-        board.printBoard();
-        game.winCondition(board, player1, player2);
+
+        while (true) {
+            game.checkTurn(player1, player2);
+        }
 
 
 //        board.positionNumber[1] = 'O';

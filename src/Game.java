@@ -66,6 +66,7 @@ public class Game {
             play1(player1);
             turn = 'X';
         }
+        board.printBoard();
     }
 
     //Checks for winning conditions. Three rows, three columns and two diagonals containing the same symbol.
@@ -99,7 +100,7 @@ public class Game {
 
         }
         //If no rows, no columns or no diagonals contain X or O, start a loop though all the positions of the board and check if they have valid value.
-        //If all values are valid (aka X or O), it means the board is full and the game is therefore a draw.
+        //If all values are valid (aka X or O), it means the board is full, and the game is therefore a draw.
         else {
             for (int i = 1; i <= 9; i++) {
                 if (board.positionNumber[i] == 'X' || board.positionNumber[i] == 'O') {

@@ -21,7 +21,11 @@ public class Board {
 
     }
     public void printBoard() {
-
+        for (int i =1; i <= 9; i++) {
+            if (positionNumber[i] != 'X' && positionNumber[i] != 'O') {
+                positionNumber[i] = ' ';
+            }
+        }
         System.out.println("\n\n");
         System.out.println("\t\t  " + positionNumber[1] + " | " + positionNumber[2] + " | " + positionNumber[3]);
         System.out.println("\t\t ___|___|___ " );

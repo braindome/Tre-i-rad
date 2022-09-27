@@ -6,17 +6,17 @@ public class Player {
     int score;
     Scanner scan = new Scanner(System.in);
     public Player() {
-        this.name = name;
+
     }
 
-    public void createPlayerX(Player playerX) {
+    public void createPlayerX() {
         System.out.println("Please enter name of Player X:");
         this.name = scan.nextLine();
         this.symbol = 'X';
         this.score = 0;
     }
 
-    public void createPlayerO(Player playerO) {
+    public void createPlayerO() {
         System.out.println("Please enter name of Player O:");
         this.name = scan.nextLine();
         this.symbol = 'O';
