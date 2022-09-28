@@ -5,8 +5,9 @@ public class Board {
 
     public Board() {
 
-
     }
+
+    //Resets board to empty.
     public void resetBoard() {
         for (int i = 1; i <= 9; i++) {
             positionNumber[i] = ' ';
@@ -20,6 +21,8 @@ public class Board {
         System.out.println("\n\n" );
 
     }
+
+    //Prints board with updated positions.
     public void printBoard() {
         for (int i = 1; i <= 9; i++) {
             if (positionNumber[i] != 'X' && positionNumber[i] != 'O') {

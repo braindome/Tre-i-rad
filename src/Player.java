@@ -9,6 +9,8 @@ public class Player {
 
     }
 
+
+    //Functions create players and assign name, symbol and keep track of the score.
     public void createPlayerX() {
         System.out.println("Please enter name of Player X:");
         this.name = scan.nextLine();
@@ -23,6 +25,7 @@ public class Player {
         this.score = 0;
     }
 
+    //Prints string with player data.
     public String toString() {
         return "Player name: " + name + ", symbol chosen " + symbol + ". Score: " + score;
     }

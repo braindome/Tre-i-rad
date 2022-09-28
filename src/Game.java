@@ -6,8 +6,6 @@ public class Game {
     Board board = new Board();
     Random random = new Random();
     Scanner scan = new Scanner(System.in);
-    Player player1 = new Player();
-    Player player2 = new Player();
     char turn = ' ';
     char winner = ' ';
 
@@ -15,7 +13,21 @@ public class Game {
 
     }
 
-    public void play() {
+    //Plays a turn and hands the next turn to the other player.
+    public void turn(Player player1, Player player2) {
+        if (turn == 'X') {
+            System.out.println(player2.name + ", make a move.");
+            play(player1, player2);
+            turn = 'O';
+        } else if (turn == 'O') {
+            System.out.println(player1.name + ", make a move.");
+            play(player1, player2);
+            turn = 'X';
+        }
+    }
+
+    //The selected player makes a move. It then prints the updated board and checks for victory conditions.
+    public void play(Player player1, Player player2) {
         int input = scan.nextInt();
         if (positionCheck(input)) {
             if (input > 0 && input <= 9) {
@@ -33,38 +45,27 @@ public class Game {
         winCondition(board, player1, player2);
     }
 
+    //Checks if position picked is occupied.
     public boolean positionCheck(int n) {
         if (board.positionNumber[n] == 'O' || board.positionNumber[n] == 'X') {
             System.out.println("Position is taken; please select another location.");                   //Fix position overlap error-handling
             return false;
-
         }
         return true;
     }
 
-
+    //Selects a random player to begin the game.
     public void randomPlayerStart(Player[] players) {
         int plNum = random.nextInt(2);
         turn = players[plNum].symbol;
     }
 
-    public void checkTurn(Player player1, Player player2) {
-        if (turn == 'X') {
-            System.out.println(player2.name + ", make a move.");
-            play();
-            turn = 'O';
-        } else if (turn == 'O') {
-            System.out.println(player1.name + ", make a move.");
-            play();
-            turn = 'X';
-        }
-    }
+
 
 
 
     //Checks for winning conditions. Three rows, three columns and two diagonals containing the same symbol.
     public void winCondition(Board board, Player player1, Player player2) {
-        //char winner = ' ';
 
         if (board.positionNumber[1] == 'X' && board.positionNumber[2] == 'X' && board.positionNumber[3] == 'X') winner = 'X';
         if (board.positionNumber[4] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[6] == 'X') winner = 'X';
