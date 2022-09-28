@@ -8,7 +8,7 @@ public class Board {
 
     }
     public void resetBoard() {
-        for (int i = 1; i<= 9; i++) {
+        for (int i = 1; i <= 9; i++) {
             positionNumber[i] = ' ';
         }
         System.out.println("\n\n");
@@ -21,7 +21,7 @@ public class Board {
 
     }
     public void printBoard() {
-        for (int i =1; i <= 9; i++) {
+        for (int i = 1; i <= 9; i++) {
             if (positionNumber[i] != 'X' && positionNumber[i] != 'O') {
                 positionNumber[i] = ' ';
             }
@@ -36,21 +36,4 @@ public class Board {
 
     }
 
-    public void printInstructions() {
-        System.out.println("1. The game is played on a grid.");
-        System.out.println("2. Insert player names and select a symbol to use (X or O).");
-        System.out.println("3. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.");
-        System.out.println("4. When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie. ");
-        System.out.println("5. Squares are inputted according to the following table:");
-    }
-
-    public void printPositions() {
-        System.out.println("\n");
-        System.out.println("\t\t  " + 1 + " | " + 2 + " | " + 3);
-        System.out.println("\t\t ___|___|___ " );
-        System.out.println("\t\t  " + 4 + " | " + 5 + " | " + 6);
-        System.out.println("\t\t ___|___|___ " );
-        System.out.println("\t\t  " + 7 + " | " + 8 + " | " + 9);
-        System.out.println("\n" );
-    }
 }
