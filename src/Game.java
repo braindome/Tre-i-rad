@@ -51,7 +51,7 @@ public class Game {
 
         while (!exitWhileLoop) {
 
-               System.out.println("Entering play method while-loop");
+                System.out.println("Entering play method while-loop");
 
               //int inputPosition = readIntFromUser(scan);
                 String s = sc.nextLine();
