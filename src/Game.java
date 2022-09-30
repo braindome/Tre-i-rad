@@ -136,7 +136,7 @@ public class Game {
 
 
     //Checks for winning conditions. Three rows, three columns and two diagonals containing the same symbol.
-    public void winCondition(Board board, Player player1, Player player2) {
+    public boolean winCondition(Board board, Player player1, Player player2) {
 
         if (board.positionNumber[1] == 'X' && board.positionNumber[2] == 'X' && board.positionNumber[3] == 'X') winner = 'X';
         if (board.positionNumber[4] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[6] == 'X') winner = 'X';
@@ -180,6 +180,27 @@ public class Game {
             }
         }
 
+        return true;
 
+    }
+
+
+    public boolean menuChoice (int n) {
+        return n == 1 || n == 2;
+    }
+    public boolean playAgain() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Would you like to play again? \n [1] Play again \n [2] Quit program");
+        int choice = Integer.parseInt(sc.nextLine());
+        if (menuChoice(choice)) {
+            if (choice == 1) {
+                return true;
+
+            } else if (choice == 2) {
+                System.out.println("Thank you for playing!");
+            }
+        }
+        return true;
     }
 }
