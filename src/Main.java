@@ -13,9 +13,9 @@ public class Main {
         System.out.println("5. Squares are inputted according to the following table:");
         System.out.println("\n");
         System.out.println("\t\t  " + 1 + " | " + 2 + " | " + 3);
-        System.out.println("\t\t ___|___|___ " );
+        System.out.println("\t\t ---+---+--- " );
         System.out.println("\t\t  " + 4 + " | " + 5 + " | " + 6);
-        System.out.println("\t\t ___|___|___ " );
+        System.out.println("\t\t ---+---+--- " );
         System.out.println("\t\t  " + 7 + " | " + 8 + " | " + 9);
         System.out.println("\n" );
         System.out.println("Let the game begin!");
