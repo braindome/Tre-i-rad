@@ -151,16 +151,16 @@ public class Game {
         //If no rows, no columns or no diagonals contain X or O, start a loop though all the positions of the board and check if they have valid value.
         //If all values are valid (aka X or O), it means the board is full, and the game is therefore a draw.
         if (winner == 'O') {
-            System.out.println(player2.name + " wins the game");
+            System.out.println(player2.name + " wins the game.");
             player2.score++;
             System.out.println(player2.name + " score: " + player2.score);
-            return true;
+            //return true;
 
         } else if (winner == 'X') {
             System.out.println(player1.name + " wins this game.");
             player1.score++;
             System.out.println(player1.name + " score: " + player1.score);
-            return true;
+            //return true;
 
         } else {
             for (int i = 1; i <= 9; i++) {
@@ -183,8 +183,8 @@ public class Game {
         randomPlayerStart(players);
         board.resetBoard();
     }
-    public boolean menuChoice (int n) {
-        return n == 1 || n == 2;
-    }
+//    public boolean menuChoice (int n) {
+//        return n == 1 || n == 2;
+//    }
 
 }
