@@ -14,13 +14,11 @@ public class Main {
         System.out.println(p2);
 
 
-        board.resetBoard();
+        game.start(players);
+        do {
+            game.play(p1, p2);
 
-        game.randomPlayerStart(players);
-
-        while (true) {
-            game.turn(p1, p2);
-        }
+        } while (!game.winCondition(board, p1, p2));
 
 
 

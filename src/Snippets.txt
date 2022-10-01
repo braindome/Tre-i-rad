@@ -1,0 +1,12 @@
+                    System.out.println("Would you like to play again? \n [1] Play again \n [2] Quit program");
+                    int choice = Integer.parseInt(sc.nextLine());
+                    if (game.menuChoice(choice)) {
+                        if (choice == 1) {
+                            System.out.println("Score: " + "\n" + p1.name + " score: " + p1.score + "\n" + p2.name + " score: " + p2.score);
+                            System.out.println("Restarting....");
+
+                        } else if (choice == 2) {
+                            System.out.println("Thank you for playing!");
+                            System.out.println("Final score: " + "\n" + p1.name + " score: " + p1.score + "\n" + p2.name + " score: " + p2.score);
+                            rePlay = true;
+                            playing = false;

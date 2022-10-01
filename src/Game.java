@@ -13,18 +13,19 @@ public class Game {
 
     }
 
+
     //Plays a turn and hands the next turn to the other player.
-    public void turn(Player player1, Player player2) {
-        if (turn == 'X') {
-            printMakeAMove(player2);
-            play(player1, player2);
-            turn = 'O';
-        } else if (turn == 'O') {
-            printMakeAMove(player1);
-            play(player1, player2);
-            turn = 'X';
-        }
-    }
+//    public void turn(Player player1, Player player2) {
+//        if (turn == 'X') {
+//            printMakeAMove(player2);
+//            play(player1, player2);
+//            turn = 'O';
+//        } else if (turn == 'O') {
+//            printMakeAMove(player1);
+//            play(player1, player2);
+//            turn = 'X';
+//        }
+//    }
 
 
     //Prints whose turn it is.
@@ -34,7 +35,7 @@ public class Game {
 
     //Checks if input position is taken.
     public boolean isInputTaken(int input){
-        System.out.println("isInputTaken: " + (board.positionNumber[input] == 'O' || board.positionNumber[input] == 'X'));
+        //System.out.println("isInputTaken: " + (board.positionNumber[input] == 'O' || board.positionNumber[input] == 'X'));
         return (board.positionNumber[input] == 'O' || board.positionNumber[input] == 'X');
     }
 
@@ -51,52 +52,42 @@ public class Game {
 
         while (!exitWhileLoop) {
 
-                System.out.println("Entering play method while-loop");
+            //System.out.println("Entering play method while-loop");
 
-              //int inputPosition = readIntFromUser(scan);
-                String s = sc.nextLine();
-                int inputPosition = Integer.parseInt(s);
+            String s = sc.nextLine();
+            int inputPosition = Integer.parseInt(s);
 
+            boolean isValidInput = isValidRange(inputPosition);
+            System.out.println("isValidRange: " + isValidInput);
 
-//            try {
+            if(isValidInput) {
+                //Here is a valid input between 1 to 9
 
-//              if(isValidRange(inputPosition)){
+                boolean isTaken = isInputTaken(inputPosition);
 
-//              positionCheck(inputPosition);
-                boolean isValidInput = isValidRange(inputPosition);
-                System.out.println("isValidRange: " + isValidInput);
-
-                if(isValidInput) {
-                    //Here is a valid input between 1 to 9
-
-                    boolean isTaken = isInputTaken(inputPosition);
-
-                    if (!isTaken) { //kommer tillbaka rätt = false ska vara här
-                        if (turn == 'O') {
-                            System.out.println("turn O - placing X");
-                            board.positionNumber[inputPosition] = 'X';
-                        } else if (turn == 'X') {
-                            System.out.println("turn X - placing O");
-                            board.positionNumber[inputPosition] = 'O';
-                        }
-                        exitWhileLoop = true;
-                    } else {
-                        System.out.println("Position is taken; please select another location.");
+                if (!isTaken) { //kommer tillbaka rätt = false ska vara här
+                    if (turn == 'X') {
+                        printMakeAMove(player2);
+                        board.positionNumber[inputPosition] = 'X';
+                        turn = 'O';
+                    } else if (turn == 'O') {
+                        printMakeAMove(player1);
+                        board.positionNumber[inputPosition] = 'O';
+                        turn = 'X';
                     }
+                    exitWhileLoop = true;
                 } else {
-                    System.out.println("Error. Out of boundaries.");
+                    System.out.println("Position is taken; please select another location.");
                 }
+            } else {
+                System.out.println("Error. Out of boundaries.");
+            }
 
-//
-//            } catch (Exception e) {
-//
-////                inputPosition = readIntFromUser(scan);
-////                exitWhileLoop = true;
-//            }
         }
 
         board.printBoard();
         winCondition(board, player1, player2);
+
     }
 
     //Checks if input is valid (The input must be 1) an integer 2) between and included 1 and 9). UPDATE: Incorporated into play().
@@ -131,6 +122,7 @@ public class Game {
     public void randomPlayerStart(Player[] players) {
         int plNum = random.nextInt(2);
         turn = players[plNum].symbol;
+        System.out.println(players[plNum].name + ", you have the first move.");
     }
 
 
@@ -162,11 +154,13 @@ public class Game {
             System.out.println(player2.name + " wins the game");
             player2.score++;
             System.out.println(player2.name + " score: " + player2.score);
+            return true;
 
         } else if (winner == 'X') {
             System.out.println(player1.name + " wins this game.");
             player1.score++;
             System.out.println(player1.name + " score: " + player1.score);
+            return true;
 
         } else {
             for (int i = 1; i <= 9; i++) {
@@ -180,27 +174,17 @@ public class Game {
             }
         }
 
-        return true;
+        return false;
 
     }
 
-
+    public void start(Player[] players) {
+        board.printInstructions();
+        randomPlayerStart(players);
+        board.resetBoard();
+    }
     public boolean menuChoice (int n) {
         return n == 1 || n == 2;
     }
-    public boolean playAgain() {
-        Scanner sc = new Scanner(System.in);
 
-        System.out.println("Would you like to play again? \n [1] Play again \n [2] Quit program");
-        int choice = Integer.parseInt(sc.nextLine());
-        if (menuChoice(choice)) {
-            if (choice == 1) {
-                return true;
-
-            } else if (choice == 2) {
-                System.out.println("Thank you for playing!");
-            }
-        }
-        return true;
-    }
 }
