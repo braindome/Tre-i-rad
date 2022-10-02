@@ -5,7 +5,7 @@ public class Game {
 
     Board board = new Board();
     Random random = new Random();
-    //Scanner scan = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
     char turn = ' ';
     char winner = ' ';
 
@@ -52,8 +52,6 @@ public class Game {
 
         while (!exitWhileLoop) {
 
-            //System.out.println("Entering play method while-loop");
-
             String s = sc.nextLine();
             int inputPosition = Integer.parseInt(s);
 
@@ -62,7 +60,6 @@ public class Game {
 
             if(isValidInput) {
                 //Here is a valid input between 1 to 9
-
                 boolean isTaken = isInputTaken(inputPosition);
 
                 if (!isTaken) { //kommer tillbaka rätt = false ska vara här
@@ -86,7 +83,9 @@ public class Game {
         }
 
         board.printBoard();
-        winCondition(board, player1, player2);
+//        if (winCondition(board, player1, player2)) {
+//            playAgain(player1, player2);
+//        }
 
     }
 
@@ -130,6 +129,8 @@ public class Game {
     //Checks for winning conditions. Three rows, three columns and two diagonals containing the same symbol.
     public boolean winCondition(Board board, Player player1, Player player2) {
 
+
+
         if (board.positionNumber[1] == 'X' && board.positionNumber[2] == 'X' && board.positionNumber[3] == 'X') winner = 'X';
         if (board.positionNumber[4] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[6] == 'X') winner = 'X';
         if (board.positionNumber[7] == 'X' && board.positionNumber[8] == 'X' && board.positionNumber[9] == 'X') winner = 'X';
@@ -151,16 +152,16 @@ public class Game {
         //If no rows, no columns or no diagonals contain X or O, start a loop though all the positions of the board and check if they have valid value.
         //If all values are valid (aka X or O), it means the board is full, and the game is therefore a draw.
         if (winner == 'O') {
-            System.out.println(player2.name + " wins the game.");
+            System.out.println(player2.name + " wins this game.");
             player2.score++;
             System.out.println(player2.name + " score: " + player2.score);
-            //return true;
+            return true;
 
         } else if (winner == 'X') {
             System.out.println(player1.name + " wins this game.");
             player1.score++;
             System.out.println(player1.name + " score: " + player1.score);
-            //return true;
+            return true;
 
         } else {
             for (int i = 1; i <= 9; i++) {
@@ -168,13 +169,17 @@ public class Game {
                     if (i==9) {
                         winner = 'N';
                         System.out.println("Game is a draw");
-                        break;
+                        return true;
+
                     }
+
                 }
             }
+
         }
 
         return false;
+
 
     }
 
@@ -183,8 +188,26 @@ public class Game {
         randomPlayerStart(players);
         board.resetBoard();
     }
-//    public boolean menuChoice (int n) {
-//        return n == 1 || n == 2;
-//    }
+    public boolean menuChoice (int n) {
+        return n == 1 || n == 2;
+    }
 
+    public boolean playAgain(Player player1, Player player2) {
+        System.out.println("Would you like to play again? \n [1] Play again \n [2] Quit program");
+        int choice = Integer.parseInt(scan.nextLine());
+        if (menuChoice(choice)) {
+            if (choice == 1) {
+                System.out.println("Score: " + "\n" + player1.name + " score: " + player1.score + "\n" + player2.name + " score: " + player2.score);
+                System.out.println("Restarting....");
+                return true;
+
+            } else if (choice == 2) {
+                System.out.println("Thank you for playing!");
+                System.out.println("Final score: " + "\n" + player1.name + " score: " + player1.score + "\n" + player2.name + " score: " + player2.score);
+                return false;
+            } else return false;
+        }
+
+        return true;
+    }
 }

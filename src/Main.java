@@ -13,14 +13,33 @@ public class Main {
         System.out.println(p1);
         System.out.println(p2);
 
+        //boolean mainLoop = true;
 
-        game.start(players);
-        do {
-            game.play(p1, p2);
+        //FIXME: Main loop and winning conditions
+        //FIXME: Both "Quit game" and "Play again" stop the program
 
-        } while (!game.winCondition(board, p1, p2));
+        boolean loop = true;
+        boolean loop2 = true;
+        while (loop) {
+            game.start(players);
+            while (loop2) {
+                game.play(p1, p2);
+                game.winCondition(board, p1, p2);
+                System.out.println("Loop end");
+                if (!game.winCondition(board, p1, p2)) {
+                    game.playAgain(p1, p2);
+                    if (!game.playAgain(p1, p2)) {
+                        loop = false;
+                        loop2 = false;
+                        //break;
+                    }
 
+                }
+            }
 
+        }
 
     }
+
+
 }
