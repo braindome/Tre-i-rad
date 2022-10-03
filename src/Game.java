@@ -3,29 +3,16 @@ import java.util.Scanner;
 
 public class Game {
 
-    Board board = new Board();
+    Board board;
     Random random = new Random();
     Scanner scan = new Scanner(System.in);
     char turn = ' ';
-    char winner = ' ';
 
-    public Game() {
+    public Game(Board board) {
+        this.board = board;
 
     }
 
-
-    //Plays a turn and hands the next turn to the other player.
-//    public void turn(Player player1, Player player2) {
-//        if (turn == 'X') {
-//            printMakeAMove(player2);
-//            play(player1, player2);
-//            turn = 'O';
-//        } else if (turn == 'O') {
-//            printMakeAMove(player1);
-//            play(player1, player2);
-//            turn = 'X';
-//        }
-//    }
 
 
     //Prints whose turn it is.
@@ -73,6 +60,7 @@ public class Game {
                         turn = 'X';
                     }
                     exitWhileLoop = true;
+
                 } else {
                     System.out.println("Position is taken; please select another location.");
                 }
@@ -81,41 +69,11 @@ public class Game {
             }
 
         }
-
+        //Checks for victory/draw conditions after each turn.
         board.printBoard();
-//        if (winCondition(board, player1, player2)) {
-//            playAgain(player1, player2);
-//        }
-
+        winCondition(board, player1, player2);
     }
 
-    //Checks if input is valid (The input must be 1) an integer 2) between and included 1 and 9). UPDATE: Incorporated into play().
-//    public int readIntFromUser(Scanner scan) {
-//        while (true) {
-//            try {
-//                String s = scan.nextLine();
-//                return Integer.parseInt(s);
-//            } catch (Exception e) {
-//                System.out.println("Try again");
-//            }
-//        }
-//    }
-
-
-    //Checks if position picked is valid (assuming input is a valid integer) UPDATE: no longer in used. See: isInputTaken.
-//    public int positionCheck(int n) {
-//
-//        while (true) {
-//            // While true take input from scanner
-//            if (board.positionNumber[n] == 'O' || board.positionNumber[n] == 'X') {
-//                System.out.println("Position is taken; please select another location.");       //Fix position overlap error-handling
-//                n = readIntFromUser(scan);
-//
-//            } else break;
-//        }
-//        return n;
-//
-//    }
 
     //Selects a random player to begin the game.
     public void randomPlayerStart(Player[] players) {
@@ -127,9 +85,9 @@ public class Game {
 
 
     //Checks for winning conditions. Three rows, three columns and two diagonals containing the same symbol.
-    public boolean winCondition(Board board, Player player1, Player player2) {
+    public char winCondition(Board board, Player player1, Player player2) {
 
-
+        char winner = ' ';
 
         if (board.positionNumber[1] == 'X' && board.positionNumber[2] == 'X' && board.positionNumber[3] == 'X') winner = 'X';
         if (board.positionNumber[4] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[6] == 'X') winner = 'X';
@@ -153,45 +111,50 @@ public class Game {
         //If all values are valid (aka X or O), it means the board is full, and the game is therefore a draw.
         if (winner == 'O') {
             System.out.println(player2.name + " wins this game.");
-            player2.score++;
+            player2.score = player2.score + 1;
+            System.out.println("+1 score to " + player2.name);
             System.out.println(player2.name + " score: " + player2.score);
-            return true;
+            return winner;
 
-        } else if (winner == 'X') {
+        }
+        if (winner == 'X') {
             System.out.println(player1.name + " wins this game.");
-            player1.score++;
+            player1.score = player1.score + 1;
+            System.out.println("+1 score to " + player1.name);
             System.out.println(player1.name + " score: " + player1.score);
-            return true;
-
-        } else {
-            for (int i = 1; i <= 9; i++) {
-                if (board.positionNumber[i] == 'X' || board.positionNumber[i] == 'O') {
-                    if (i==9) {
-                        winner = 'N';
-                        System.out.println("Game is a draw");
-                        return true;
-
-                    }
-
-                }
-            }
+            return winner;
 
         }
 
-        return false;
+        for (int i = 1; i <= 9; i++) {
+            if (board.positionNumber[i] == 'X' || board.positionNumber[i] == 'O') {
+                if (i==9) {
+                    char draw = 'D';
+                    System.out.println("Game is a draw");
+                    return draw;
+                }
+
+            } else break;
+        }
+
+        return winner;
 
 
     }
 
+    //Groups all new start functions.
     public void start(Player[] players) {
         board.printInstructions();
         randomPlayerStart(players);
         board.resetBoard();
     }
+
+    //Input handling to use in playAgain
     public boolean menuChoice (int n) {
         return n == 1 || n == 2;
     }
 
+    //Replay menu method WIP
     public boolean playAgain(Player player1, Player player2) {
         System.out.println("Would you like to play again? \n [1] Play again \n [2] Quit program");
         int choice = Integer.parseInt(scan.nextLine());

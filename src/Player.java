@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Player {
     String name;
     char symbol;
-    int score;
+    int score = 0;
     Scanner scan = new Scanner(System.in);
     public Player() {
 

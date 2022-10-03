@@ -10,3 +10,13 @@
                             System.out.println("Final score: " + "\n" + p1.name + " score: " + p1.score + "\n" + p2.name + " score: " + p2.score);
                             rePlay = true;
                             playing = false;
+
+                    //        if (winCondition(board, player1, player2) == 'X' || winCondition(board, player1, player2) == 'O' || winCondition(board, player1, player2) == 'D') {
+                    //            System.out.println("Goodbye");
+                    //        }
+                    //        if (winCondition(board, player1, player2) == 'X' || winCondition(board, player1, player2) == 'O' || winCondition(board, player1, player2) == 'D') {
+                    //            System.out.println("goodbye");
+                    //        }
+
+                    Victory moves: p1 1, p2 3, p1 4, p2 2, p1 7
+                    Draw moves: 1 4 5 9 2 3 7 8 6
