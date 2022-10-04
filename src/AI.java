@@ -19,6 +19,6 @@ public class AI extends Player{
 
     public void selectAI(Player[] evilAIs) {
 
-        int AINum = random.nextInt(3) - 1;
+        int selectedAI = random.nextInt(3) - 1;
     }
 }

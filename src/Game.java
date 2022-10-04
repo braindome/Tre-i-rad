@@ -31,8 +31,17 @@ public class Game {
         return input >= 1 && input <= 9;
     }
 
+    public boolean isValidChoice(String input) {
+//        try { return input;} catch (Exception e) {
+//            System.out.println("Yes/no?");
+//        }
+        return input.equals("yes") || input.equals("no");
+    }
+
     //The selected player makes a move. It then prints the updated board and checks for victory conditions.
     public void play(Player player1, Player player2) {
+
+        //winCondition(board, player1, player2);
 
         boolean exitWhileLoop = false;
         Scanner sc = new Scanner(System.in);
@@ -71,7 +80,6 @@ public class Game {
         }
         //Checks for victory/draw conditions after each turn.
         board.printBoard();
-        winCondition(board, player1, player2);
     }
 
 
