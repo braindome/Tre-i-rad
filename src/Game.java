@@ -7,6 +7,7 @@ public class Game {
     Random random = new Random();
     Scanner scan = new Scanner(System.in);
     char turn = ' ';
+    AI AI;
 
     public Game(Board board) {
         this.board = board;
@@ -30,11 +31,12 @@ public class Game {
     public boolean isValidRange(int input){
         return input >= 1 && input <= 9;
     }
+    public boolean isValidBinaryChoice (int input){
+        return input >= 1 && input <= 2;
+    }
 
     public boolean isValidChoice(String input) {
-//        try { return input;} catch (Exception e) {
-//            System.out.println("Yes/no?");
-//        }
+
         return input.equals("yes") || input.equals("no");
     }
 
@@ -89,7 +91,6 @@ public class Game {
         turn = players[plNum].symbol;
         System.out.println(players[plNum].name + ", you have the first move.");
     }
-
 
 
     //Checks for winning conditions. Three rows, three columns and two diagonals containing the same symbol.
@@ -153,6 +154,7 @@ public class Game {
     //Groups all new start functions.
     public void start(Player[] players) {
         board.printInstructions();
+        //AI.selectPlayerType(AI.AIs);
         randomPlayerStart(players);
         board.resetBoard();
     }

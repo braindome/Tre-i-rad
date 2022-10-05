@@ -6,7 +6,7 @@ public class Main {
         Game game = new Game(board);
         Player p1 = new Player();
         Player p2 = new Player();
-        AI AI = new AI();
+        AI AI;
         Player[] players = {p1, p2};
         Scanner scan = new Scanner(System.in);
 
