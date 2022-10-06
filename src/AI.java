@@ -2,9 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class AI extends Player{
-    String quote;
     String[] quotes;
-    int position;
     Random random = new Random();
     AI AI1 = new AI();
     AI AI2 = new AI();
@@ -20,6 +18,7 @@ public class AI extends Player{
         AI2.name = "Agent Smith";
         AI3.name = "T-800";
         this.score = 0;
+
         AI1.quotes = new String[] {"The 9000 series is the most reliable computer ever made",
                 "Look, I can see you're really upset about this. I honestly think you ought to sit down calmly, take a stress pill, and think things over.",
                 "This game is too important for me to allow you to jeopardize it.",
@@ -37,27 +36,19 @@ public class AI extends Player{
                 "I sense injuries. The data could be called “pain.”"};
     }
 
-    //Chosen AI picks a random position (1 to 9) and adds a snarky quote.
+    //Chosen AI picks a random position (1 to 9) and prints a snarky quote.
     public int randomMove(AI AI) {
 
         AI = opponentAI;
         System.out.println(AI.name + " makes a move.");
-        System.out.println(AI.quotes());;
+        int n = random.nextInt(0, 4);
+        System.out.println(opponentAI.quotes[n]);;
         return random.nextInt(1, 9);
 
-
-    }
-
-    private int quotes() {
-        return random.nextInt(0,4);
-    }
-
-    public boolean isPlayerAI() {
-        return selectPlayerType(AIs) == opponentAI;
     }
 
     //Lets player choose between human or computer opponent. With input error handling.
-    public Player selectPlayerType(Player[] evilAIs) {
+    public void selectPlayerType() {
 
         boolean exitWhileLoop = false;
 
@@ -74,7 +65,7 @@ public class AI extends Player{
                 } else if (n == 2) {
                     int numberOfAIs = random.nextInt(2);
                     System.out.println("Selecting AI...");
-                    opponentAI = (AI) evilAIs[numberOfAIs];
+                    opponentAI = AIs[numberOfAIs];
                     System.out.println(opponentAI + " will be your opponent.");
                     exitWhileLoop = true;
                 } else {
@@ -85,6 +76,5 @@ public class AI extends Player{
             }
         }
 
-        return opponentAI;
     }
 }

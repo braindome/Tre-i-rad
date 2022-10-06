@@ -7,7 +7,7 @@ public class Game {
     Random random = new Random();
     Scanner scan = new Scanner(System.in);
     char turn = ' ';
-    AI AI;
+
 
     public Game(Board board) {
         this.board = board;
@@ -60,7 +60,7 @@ public class Game {
                 //Here is a valid input between 1 to 9
                 boolean isTaken = isInputTaken(inputPosition);
 
-                if (!isTaken) { //kommer tillbaka rätt = false ska vara här
+                if (!isTaken) {
                     if (turn == 'X') {
                         printMakeAMove(player2);
                         board.positionNumber[inputPosition] = 'X';
@@ -79,6 +79,135 @@ public class Game {
                 System.out.println("Error. Out of boundaries.");
             }
 
+        }
+        //Checks for victory/draw conditions after each turn.
+        board.printBoard();
+    }
+
+    public void playTest(Player player1, Player player2) {
+
+        boolean exitWhileLoop = false;
+        Scanner sc = new Scanner(System.in);
+
+        if (player1.type.equals("human") && player2.type.equals("human")) {
+            while (!exitWhileLoop) {
+
+                String s = sc.nextLine();
+                int inputPosition = Integer.parseInt(s);
+
+                boolean isValidInput = isValidRange(inputPosition);
+                System.out.println("isValidRange: " + isValidInput);
+
+                if(isValidInput) {
+                    //Here is a valid input between 1 to 9
+                    boolean isTaken = isInputTaken(inputPosition);
+
+                    if (!isTaken) {
+                        if (turn == 'X') {
+                            printMakeAMove(player2);
+                            board.positionNumber[inputPosition] = 'X';
+                            turn = 'O';
+                        } else if (turn == 'O') {
+                            printMakeAMove(player1);
+                            board.positionNumber[inputPosition] = 'O';
+                            turn = 'X';
+                        }
+                        exitWhileLoop = true;
+
+                    } else {
+                        System.out.println("Position is taken; please select another location.");
+                    }
+                } else {
+                    System.out.println("Error. Out of boundaries.");
+                }
+
+            }
+        }
+
+        if (player1.type.equals("computer") && player2.type.equals("computer")) {
+            while (!exitWhileLoop) {
+                int inputPosition = random.nextInt(1,9);
+                if (!isInputTaken(inputPosition)) {
+                    if (turn == 'X') {
+                        printMakeAMove(player2);
+                        board.positionNumber[inputPosition] = 'X';
+                        turn = 'O';
+                    } else if (turn == 'O') {
+                        printMakeAMove(player1);
+                        board.positionNumber[inputPosition] = 'O';
+                        turn = 'X';
+                    }
+                    exitWhileLoop = true;
+                }
+            }
+        }
+
+        if (player1.type.equals("human") && player2.type.equals("computer")) {
+            while (!exitWhileLoop) {
+                if (turn == 'X') {
+                    String s = sc.nextLine();
+                    int inputPosition = Integer.parseInt(s);
+
+                    boolean isValidInput = isValidRange(inputPosition);
+                    System.out.println("isValidRange: " + isValidInput);
+                    if (isValidInput) {
+                        boolean isTaken = isInputTaken(inputPosition);
+                        if (!isTaken) {
+                            printMakeAMove(player2);
+                            board.positionNumber[inputPosition] = 'X';
+                            turn = 'O';
+                        } else {System.out.println("Position is taken. Please select another location");}
+                    } else {
+                        System.out.println("Error. Out of boundaries.");
+                    }
+
+                } else if (turn == 'O') {
+                    int computerInput = random.nextInt(1,9);
+                    boolean isTaken = isInputTaken(computerInput);
+                    if (!isTaken) {
+                        System.out.println("AI makes a move.");
+                        board.positionNumber[computerInput] = 'O';
+                        turn = 'X';
+                    }
+                }
+                exitWhileLoop = true;
+
+
+            }
+        }
+
+        if (player1.type.equals("computer") && player2.type.equals("human")) {
+            while (!exitWhileLoop) {
+                if (turn == 'O') {
+                    String s = sc.nextLine();
+                    int inputPosition = Integer.parseInt(s);
+
+                    boolean isValidInput = isValidRange(inputPosition);
+                    System.out.println("isValidRange: " + isValidInput);
+                    if (isValidInput) {
+                        boolean isTaken = isInputTaken(inputPosition);
+                        if (!isTaken) {
+                            printMakeAMove(player2);
+                            board.positionNumber[inputPosition] = 'O';
+                            turn = 'X';
+                        } else {System.out.println("Position is taken. Please select another location");}
+                    } else {
+                        System.out.println("Error. Out of boundaries.");
+                    }
+
+                } else if (turn == 'X') {
+                    int computerInput = random.nextInt(1,9);
+                    boolean isTaken = isInputTaken(computerInput);
+                    if (!isTaken) {
+                        System.out.println("AI makes a move.");
+                        board.positionNumber[computerInput] = 'X';
+                        turn = 'O';
+                    }
+                }
+                exitWhileLoop = true;
+
+
+            }
         }
         //Checks for victory/draw conditions after each turn.
         board.printBoard();
