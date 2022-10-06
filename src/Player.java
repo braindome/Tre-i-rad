@@ -10,21 +10,49 @@ public class Player {
 
     }
 
+    public boolean isValidBinaryChoice (int input){
+        return input >= 1 && input <= 2;
+    }
 
 
-    //Functions create players and assign name, symbol and keep track of the score.
+
+    //Functions create players and assign name, symbol and keep track of the score. UPDATE: Added player type (human or computer).
     public void createPlayerX() {
         System.out.println("Please enter name of Player X:");
         this.name = scan.nextLine();
         this.symbol = 'X';
         this.score = 0;
         System.out.println("Is this player a [1] human or a [2] computer?");
-        int playerType = scan.nextInt();
-        if (playerType == 1) {
-            this.type = "human";
-        } else if (playerType == 2) {
-            this.type = "computer";
+
+        boolean exitWhileLoop = false;
+
+        //Input error handling. Binary choice between 1 and 2.
+        while (!exitWhileLoop) {
+            try {
+                String s = scan.nextLine();
+                int playerType = Integer.parseInt(s);
+                if (isValidBinaryChoice(playerType)) {
+                    if (playerType == 1) {
+                        this.type = "human";
+                        exitWhileLoop = true;
+                    } else if (playerType == 2) {
+                        this.type = "computer";
+                        exitWhileLoop = true;
+                    } else {
+                        System.out.println("Please enter 1 or 2.");
+                    }
+
+                } else {
+                    System.out.println("Please enter 1 or 2");
+                }
+
+            } catch (Exception e) {
+                System.out.println("Invalid input type.");
+            }
         }
+
+
+
 
     }
 
@@ -34,11 +62,31 @@ public class Player {
         this.symbol = 'O';
         this.score = 0;
         System.out.println("Is this player a [1] human or a [2] computer?");
-        int playerType = scan.nextInt();
-        if (playerType == 1) {
-            this.type = "human";
-        } else if (playerType == 2) {
-            this.type = "computer";
+
+        boolean exitWhileLoop = false;
+
+        while (!exitWhileLoop) {
+            try {
+                String s = scan.nextLine();
+                int playerType = Integer.parseInt(s);
+                if (isValidBinaryChoice(playerType)) {
+                    if (playerType == 1) {
+                        this.type = "human";
+                        exitWhileLoop = true;
+                    } else if (playerType == 2) {
+                        this.type = "computer";
+                        exitWhileLoop = true;
+                    } else {
+                        System.out.println("Please enter 1 or 2.");
+                    }
+
+                } else {
+                    System.out.println("Please enter 1 or 2");
+                }
+
+            } catch (Exception e) {
+                System.out.println("Invalid input type.");
+            }
         }
     }
 

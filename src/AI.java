@@ -1,5 +1,7 @@
+//WORK IN PROGRESS
 import java.util.Random;
 import java.util.Scanner;
+
 
 public class AI extends Player{
     String[] quotes;

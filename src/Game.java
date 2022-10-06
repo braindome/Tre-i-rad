@@ -27,6 +27,7 @@ public class Game {
         return (board.positionNumber[input] == 'O' || board.positionNumber[input] == 'X');
     }
 
+
     //Checks if input range is valid (1 to 9, all the locations on the game board).
     public boolean isValidRange(int input){
         return input >= 1 && input <= 9;
@@ -35,95 +36,152 @@ public class Game {
         return input >= 1 && input <= 2;
     }
 
-    public boolean isValidChoice(String input) {
+    public boolean playAgain() {
 
-        return input.equals("yes") || input.equals("no");
+        System.out.println("Would you like to play another round?");
+        String choice = scan.nextLine();
+        boolean answer = choice.equals("yes") || choice.equals("no");
+        while (!answer) {
+            System.out.println("Invalid choice. Please type 'yes' or 'no'.");
+            choice = scan.nextLine();
+            answer = choice.equals("yes") || choice.equals("no");
+        }
+        return !choice.equals("no");
     }
 
     //The selected player makes a move. It then prints the updated board and checks for victory conditions.
+//    public void play(Player player1, Player player2) {
+//
+//        boolean exitWhileLoop = false;
+//        Scanner sc = new Scanner(System.in);
+//
+//        while (!exitWhileLoop) {
+//
+//            String s = sc.nextLine();
+//            int inputPosition = Integer.parseInt(s);
+//
+//            boolean isValidInput = isValidRange(inputPosition);
+//            System.out.println("isValidRange: " + isValidInput);
+//
+//            if(isValidInput) {
+//                //Here is a valid input between 1 and 9
+//                boolean isTaken = isInputTaken(inputPosition);
+//
+//                if (!isTaken) {
+//                    if (turn == 'X') {
+//                        printMakeAMove(player2);
+//                        board.positionNumber[inputPosition] = 'X';
+//                        turn = 'O';
+//                    } else if (turn == 'O') {
+//                        printMakeAMove(player1);
+//                        board.positionNumber[inputPosition] = 'O';
+//                        turn = 'X';
+//                    }
+//                    exitWhileLoop = true;
+//
+//                } else {
+//                    System.out.println("Position is taken; please select another location.");
+//                }
+//            } else {
+//                System.out.println("Error. Out of boundaries.");
+//            }
+//
+//        }
+//        //Checks for victory/draw conditions after each turn.
+//        board.printBoard();
+//    }
+
+//    public void playInputTest(Player player1, Player player2) {
+//
+//        boolean exitWhileLoop = false;
+//        Scanner sc = new Scanner(System.in);
+//
+//        while (!exitWhileLoop) {
+//
+//            try {
+//                String s = sc.nextLine();
+//                int inputPosition = Integer.parseInt(s);
+//
+//                boolean isValidInput = isValidRange(inputPosition);
+//                System.out.println("isValidRange: " + isValidInput);
+//
+//                if(isValidInput) {
+//                    //Here is a valid input between 1 and 9
+//                    boolean isTaken = isInputTaken(inputPosition);
+//
+//                    if (!isTaken) {
+//                        if (turn == 'X') {
+//                            printMakeAMove(player2);
+//                            board.positionNumber[inputPosition] = 'X';
+//                            turn = 'O';
+//                        } else if (turn == 'O') {
+//                            printMakeAMove(player1);
+//                            board.positionNumber[inputPosition] = 'O';
+//                            turn = 'X';
+//                        }
+//                        exitWhileLoop = true;
+//
+//                    } else {
+//                        System.out.println("Position is taken; please select another location.");
+//                    }
+//                } else {
+//                    System.out.println("Error. Out of boundaries.");
+//                }
+//            } catch (Exception e) {
+//                System.out.println("Invalid input");
+//            }
+//
+//
+//        }
+//        //Checks for victory/draw conditions after each turn.
+//        board.printBoard();
+//    }
     public void play(Player player1, Player player2) {
 
-        //winCondition(board, player1, player2);
-
         boolean exitWhileLoop = false;
         Scanner sc = new Scanner(System.in);
 
-        while (!exitWhileLoop) {
-
-            String s = sc.nextLine();
-            int inputPosition = Integer.parseInt(s);
-
-            boolean isValidInput = isValidRange(inputPosition);
-            System.out.println("isValidRange: " + isValidInput);
-
-            if(isValidInput) {
-                //Here is a valid input between 1 to 9
-                boolean isTaken = isInputTaken(inputPosition);
-
-                if (!isTaken) {
-                    if (turn == 'X') {
-                        printMakeAMove(player2);
-                        board.positionNumber[inputPosition] = 'X';
-                        turn = 'O';
-                    } else if (turn == 'O') {
-                        printMakeAMove(player1);
-                        board.positionNumber[inputPosition] = 'O';
-                        turn = 'X';
-                    }
-                    exitWhileLoop = true;
-
-                } else {
-                    System.out.println("Position is taken; please select another location.");
-                }
-            } else {
-                System.out.println("Error. Out of boundaries.");
-            }
-
-        }
-        //Checks for victory/draw conditions after each turn.
-        board.printBoard();
-    }
-
-    public void playTest(Player player1, Player player2) {
-
-        boolean exitWhileLoop = false;
-        Scanner sc = new Scanner(System.in);
-
+        //Turn handling case 1: human vs human.
         if (player1.type.equals("human") && player2.type.equals("human")) {
             while (!exitWhileLoop) {
 
-                String s = sc.nextLine();
-                int inputPosition = Integer.parseInt(s);
+                try {
+                    String s = sc.nextLine();
+                    int inputPosition = Integer.parseInt(s);
 
-                boolean isValidInput = isValidRange(inputPosition);
-                System.out.println("isValidRange: " + isValidInput);
+                    boolean isValidInput = isValidRange(inputPosition);
+                    System.out.println("isValidRange: " + isValidInput);
 
-                if(isValidInput) {
-                    //Here is a valid input between 1 to 9
-                    boolean isTaken = isInputTaken(inputPosition);
+                    if(isValidInput) {
+                        //Here is a valid input between 1 to 9
+                        boolean isTaken = isInputTaken(inputPosition);
 
-                    if (!isTaken) {
-                        if (turn == 'X') {
-                            printMakeAMove(player2);
-                            board.positionNumber[inputPosition] = 'X';
-                            turn = 'O';
-                        } else if (turn == 'O') {
-                            printMakeAMove(player1);
-                            board.positionNumber[inputPosition] = 'O';
-                            turn = 'X';
+                        if (!isTaken) {
+                            if (turn == 'X') {
+                                printMakeAMove(player2);
+                                board.positionNumber[inputPosition] = 'X';
+                                turn = 'O';
+                            } else if (turn == 'O') {
+                                printMakeAMove(player1);
+                                board.positionNumber[inputPosition] = 'O';
+                                turn = 'X';
+                            }
+                            exitWhileLoop = true;
+
+                        } else {
+                            System.out.println("Position is taken; please select another location.");
                         }
-                        exitWhileLoop = true;
-
                     } else {
-                        System.out.println("Position is taken; please select another location.");
+                        System.out.println("Error. Out of boundaries.");
                     }
-                } else {
-                    System.out.println("Error. Out of boundaries.");
+                } catch (Exception e) {
+                    System.out.println("Invalid input. Please pick an integer between 1 and 9.");
                 }
 
             }
         }
 
+        //Turn handling case 2: computer vs computer.
         if (player1.type.equals("computer") && player2.type.equals("computer")) {
             while (!exitWhileLoop) {
                 int inputPosition = random.nextInt(1,9);
@@ -142,24 +200,30 @@ public class Game {
             }
         }
 
+        //Turn handling case 3: human vs computer.
         if (player1.type.equals("human") && player2.type.equals("computer")) {
             while (!exitWhileLoop) {
                 if (turn == 'X') {
-                    String s = sc.nextLine();
-                    int inputPosition = Integer.parseInt(s);
+                    try {
+                        String s = sc.nextLine();
+                        int inputPosition = Integer.parseInt(s);
 
-                    boolean isValidInput = isValidRange(inputPosition);
-                    System.out.println("isValidRange: " + isValidInput);
-                    if (isValidInput) {
-                        boolean isTaken = isInputTaken(inputPosition);
-                        if (!isTaken) {
-                            printMakeAMove(player2);
-                            board.positionNumber[inputPosition] = 'X';
-                            turn = 'O';
-                        } else {System.out.println("Position is taken. Please select another location");}
-                    } else {
-                        System.out.println("Error. Out of boundaries.");
+                        boolean isValidInput = isValidRange(inputPosition);
+                        System.out.println("isValidRange: " + isValidInput);
+                        if (isValidInput) {
+                            boolean isTaken = isInputTaken(inputPosition);
+                            if (!isTaken) {
+                                printMakeAMove(player2);
+                                board.positionNumber[inputPosition] = 'X';
+                                turn = 'O';
+                            } else {System.out.println("Position is taken. Please select another location");}
+                        } else {
+                            System.out.println("Error. Out of boundaries.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Invalid input. Please pick an integer between 1 and 9.");
                     }
+
 
                 } else if (turn == 'O') {
                     int computerInput = random.nextInt(1,9);
@@ -176,24 +240,30 @@ public class Game {
             }
         }
 
+        //Turn handling case 4: computer vs human.
         if (player1.type.equals("computer") && player2.type.equals("human")) {
             while (!exitWhileLoop) {
                 if (turn == 'O') {
-                    String s = sc.nextLine();
-                    int inputPosition = Integer.parseInt(s);
+                    try {
+                        String s = sc.nextLine();
+                        int inputPosition = Integer.parseInt(s);
 
-                    boolean isValidInput = isValidRange(inputPosition);
-                    System.out.println("isValidRange: " + isValidInput);
-                    if (isValidInput) {
-                        boolean isTaken = isInputTaken(inputPosition);
-                        if (!isTaken) {
-                            printMakeAMove(player2);
-                            board.positionNumber[inputPosition] = 'O';
-                            turn = 'X';
-                        } else {System.out.println("Position is taken. Please select another location");}
-                    } else {
-                        System.out.println("Error. Out of boundaries.");
+                        boolean isValidInput = isValidRange(inputPosition);
+                        System.out.println("isValidRange: " + isValidInput);
+                        if (isValidInput) {
+                            boolean isTaken = isInputTaken(inputPosition);
+                            if (!isTaken) {
+                                printMakeAMove(player2);
+                                board.positionNumber[inputPosition] = 'O';
+                                turn = 'X';
+                            } else {System.out.println("Position is taken. Please select another location");}
+                        } else {
+                            System.out.println("Error. Out of boundaries.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Invalid input. Please pick an integer between 1 and 9.");
                     }
+
 
                 } else if (turn == 'X') {
                     int computerInput = random.nextInt(1,9);
@@ -209,7 +279,7 @@ public class Game {
 
             }
         }
-        //Checks for victory/draw conditions after each turn.
+
         board.printBoard();
     }
 
@@ -283,33 +353,8 @@ public class Game {
     //Groups all new start functions.
     public void start(Player[] players) {
         board.printInstructions();
-        //AI.selectPlayerType(AI.AIs);
         randomPlayerStart(players);
         board.resetBoard();
     }
 
-    //Input handling to use in playAgain
-    public boolean menuChoice (int n) {
-        return n == 1 || n == 2;
-    }
-
-    //Replay menu method WIP
-    public boolean playAgain(Player player1, Player player2) {
-        System.out.println("Would you like to play again? \n [1] Play again \n [2] Quit program");
-        int choice = Integer.parseInt(scan.nextLine());
-        if (menuChoice(choice)) {
-            if (choice == 1) {
-                System.out.println("Score: " + "\n" + player1.name + " score: " + player1.score + "\n" + player2.name + " score: " + player2.score);
-                System.out.println("Restarting....");
-                return true;
-
-            } else if (choice == 2) {
-                System.out.println("Thank you for playing!");
-                System.out.println("Final score: " + "\n" + player1.name + " score: " + player1.score + "\n" + player2.name + " score: " + player2.score);
-                return false;
-            } else return false;
-        }
-
-        return true;
-    }
 }

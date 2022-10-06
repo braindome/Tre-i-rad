@@ -1,22 +1,14 @@
-                    System.out.println("Would you like to play again? \n [1] Play again \n [2] Quit program");
-                    int choice = Integer.parseInt(sc.nextLine());
-                    if (game.menuChoice(choice)) {
-                        if (choice == 1) {
-                            System.out.println("Score: " + "\n" + p1.name + " score: " + p1.score + "\n" + p2.name + " score: " + p2.score);
-                            System.out.println("Restarting....");
+Frågor till handledare
+- IF-satser eller OR-operatör? Skillnad i loop?
 
-                        } else if (choice == 2) {
-                            System.out.println("Thank you for playing!");
-                            System.out.println("Final score: " + "\n" + p1.name + " score: " + p1.score + "\n" + p2.name + " score: " + p2.score);
-                            rePlay = true;
-                            playing = false;
-
-                    //        if (winCondition(board, player1, player2) == 'X' || winCondition(board, player1, player2) == 'O' || winCondition(board, player1, player2) == 'D') {
-                    //            System.out.println("Goodbye");
-                    //        }
-                    //        if (winCondition(board, player1, player2) == 'X' || winCondition(board, player1, player2) == 'O' || winCondition(board, player1, player2) == 'D') {
-                    //            System.out.println("goodbye");
-                    //        }
-
-                    Victory moves: p1 1, p2 3, p1 4, p2 2, p1 7
-                    Draw moves: 1 4 5 9 2 3 7 8 6
+        try {
+            String s = scan.nextLine();
+            int playerType = Integer.parseInt(s);
+            if (playerType == 1) {
+                this.type = "human";
+            } else if (playerType == 2) {
+                this.type = "computer";
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+        }
