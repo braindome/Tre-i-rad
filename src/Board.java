@@ -3,6 +3,10 @@ public class Board {
     //Position number index starting at 1 for ease of coding.
     char[] positionNumber = new char[10];
 
+    public Board(char[] positionNumber) {
+        this.positionNumber = positionNumber;
+    }
+
     public Board() {
 
     }

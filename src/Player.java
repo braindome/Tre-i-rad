@@ -6,6 +6,8 @@ public class Player {
     char symbol;
     int score = 0;
     Scanner scan = new Scanner(System.in);
+
+
     public Player() {
 
     }
@@ -91,6 +93,7 @@ public class Player {
     }
 
     //Prints string with player data.
+    @Override
     public String toString() {
         return "Player name: " + name + ", symbol chosen " + symbol + ". Score: " + score;
     }

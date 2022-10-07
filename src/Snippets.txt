@@ -1,14 +1,5 @@
 Frågor till handledare
 - IF-satser eller OR-operatör? Skillnad i loop?
+- Merge:a på github? Ha en "release"-branch och en "wip"-branch?
+- Ta bort AI och Human-klasser?
 
-        try {
-            String s = scan.nextLine();
-            int playerType = Integer.parseInt(s);
-            if (playerType == 1) {
-                this.type = "human";
-            } else if (playerType == 2) {
-                this.type = "computer";
-            }
-        } catch (Exception e) {
-            System.out.println("Invalid input.");
-        }

@@ -23,7 +23,7 @@ public class Game {
 
     //Checks if input position is taken.
     public boolean isInputTaken(int input){
-        //System.out.println("isInputTaken: " + (board.positionNumber[input] == 'O' || board.positionNumber[input] == 'X'));
+
         return (board.positionNumber[input] == 'O' || board.positionNumber[input] == 'X');
     }
 
@@ -49,93 +49,8 @@ public class Game {
         return !choice.equals("no");
     }
 
-    //The selected player makes a move. It then prints the updated board and checks for victory conditions.
-//    public void play(Player player1, Player player2) {
-//
-//        boolean exitWhileLoop = false;
-//        Scanner sc = new Scanner(System.in);
-//
-//        while (!exitWhileLoop) {
-//
-//            String s = sc.nextLine();
-//            int inputPosition = Integer.parseInt(s);
-//
-//            boolean isValidInput = isValidRange(inputPosition);
-//            System.out.println("isValidRange: " + isValidInput);
-//
-//            if(isValidInput) {
-//                //Here is a valid input between 1 and 9
-//                boolean isTaken = isInputTaken(inputPosition);
-//
-//                if (!isTaken) {
-//                    if (turn == 'X') {
-//                        printMakeAMove(player2);
-//                        board.positionNumber[inputPosition] = 'X';
-//                        turn = 'O';
-//                    } else if (turn == 'O') {
-//                        printMakeAMove(player1);
-//                        board.positionNumber[inputPosition] = 'O';
-//                        turn = 'X';
-//                    }
-//                    exitWhileLoop = true;
-//
-//                } else {
-//                    System.out.println("Position is taken; please select another location.");
-//                }
-//            } else {
-//                System.out.println("Error. Out of boundaries.");
-//            }
-//
-//        }
-//        //Checks for victory/draw conditions after each turn.
-//        board.printBoard();
-//    }
 
-//    public void playInputTest(Player player1, Player player2) {
-//
-//        boolean exitWhileLoop = false;
-//        Scanner sc = new Scanner(System.in);
-//
-//        while (!exitWhileLoop) {
-//
-//            try {
-//                String s = sc.nextLine();
-//                int inputPosition = Integer.parseInt(s);
-//
-//                boolean isValidInput = isValidRange(inputPosition);
-//                System.out.println("isValidRange: " + isValidInput);
-//
-//                if(isValidInput) {
-//                    //Here is a valid input between 1 and 9
-//                    boolean isTaken = isInputTaken(inputPosition);
-//
-//                    if (!isTaken) {
-//                        if (turn == 'X') {
-//                            printMakeAMove(player2);
-//                            board.positionNumber[inputPosition] = 'X';
-//                            turn = 'O';
-//                        } else if (turn == 'O') {
-//                            printMakeAMove(player1);
-//                            board.positionNumber[inputPosition] = 'O';
-//                            turn = 'X';
-//                        }
-//                        exitWhileLoop = true;
-//
-//                    } else {
-//                        System.out.println("Position is taken; please select another location.");
-//                    }
-//                } else {
-//                    System.out.println("Error. Out of boundaries.");
-//                }
-//            } catch (Exception e) {
-//                System.out.println("Invalid input");
-//            }
-//
-//
-//        }
-//        //Checks for victory/draw conditions after each turn.
-//        board.printBoard();
-//    }
+    //Turn handling and moving, with input handling included in this block as well.
     public void play(Player player1, Player player2) {
 
         boolean exitWhileLoop = false;
@@ -182,9 +97,11 @@ public class Game {
         }
 
         //Turn handling case 2: computer vs computer.
+        //Computer inputs always an integer so there is no need for validity check.
         if (player1.type.equals("computer") && player2.type.equals("computer")) {
             while (!exitWhileLoop) {
-                int inputPosition = random.nextInt(1,9);
+                int inputPosition = random.nextInt(1,10);
+                System.out.println("computer inputPosition:: " + inputPosition);
                 if (!isInputTaken(inputPosition)) {
                     if (turn == 'X') {
                         printMakeAMove(player2);
@@ -226,7 +143,7 @@ public class Game {
 
 
                 } else if (turn == 'O') {
-                    int computerInput = random.nextInt(1,9);
+                    int computerInput = random.nextInt(1,10);
                     boolean isTaken = isInputTaken(computerInput);
                     if (!isTaken) {
                         System.out.println("AI makes a move.");
@@ -266,7 +183,7 @@ public class Game {
 
 
                 } else if (turn == 'X') {
-                    int computerInput = random.nextInt(1,9);
+                    int computerInput = random.nextInt(1,10);
                     boolean isTaken = isInputTaken(computerInput);
                     if (!isTaken) {
                         System.out.println("AI makes a move.");
@@ -297,6 +214,9 @@ public class Game {
 
         char winner = ' ';
 
+        System.out.println("winCondition - Player 1:: " + player1.toString());
+        System.out.println("winCondition - Player 2:: " + player2.toString());
+
         if (board.positionNumber[1] == 'X' && board.positionNumber[2] == 'X' && board.positionNumber[3] == 'X') winner = 'X';
         if (board.positionNumber[4] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[6] == 'X') winner = 'X';
         if (board.positionNumber[7] == 'X' && board.positionNumber[8] == 'X' && board.positionNumber[9] == 'X') winner = 'X';
@@ -305,6 +225,12 @@ public class Game {
         if (board.positionNumber[3] == 'X' && board.positionNumber[6] == 'X' && board.positionNumber[9] == 'X') winner = 'X';
         if (board.positionNumber[1] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[9] == 'X') winner = 'X';
         if (board.positionNumber[3] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[7] == 'X') winner = 'X';
+
+        if (winner == 'X') {
+            System.out.println(player1.name + " wins this game.");
+            return winner;
+
+        }
 
         if (board.positionNumber[1] == 'O' && board.positionNumber[2] == 'O' && board.positionNumber[3] == 'O') winner = 'O';
         if (board.positionNumber[4] == 'O' && board.positionNumber[5] == 'O' && board.positionNumber[6] == 'O') winner = 'O';
@@ -317,28 +243,23 @@ public class Game {
 
         //If no rows, no columns or no diagonals contain X or O, start a loop though all the positions of the board and check if they have valid value.
         //If all values are valid (aka X or O), it means the board is full, and the game is therefore a draw.
+
+
         if (winner == 'O') {
             System.out.println(player2.name + " wins this game.");
-            player2.score = player2.score + 1;
-            System.out.println("+1 score to " + player2.name);
-            System.out.println(player2.name + " score: " + player2.score);
             return winner;
 
         }
-        if (winner == 'X') {
-            System.out.println(player1.name + " wins this game.");
-            player1.score = player1.score + 1;
-            System.out.println("+1 score to " + player1.name);
-            System.out.println(player1.name + " score: " + player1.score);
-            return winner;
 
-        }
 
         for (int i = 1; i <= 9; i++) {
+            System.out.println("iteration-" + i);
+            board.printBoard();
+//
             if (board.positionNumber[i] == 'X' || board.positionNumber[i] == 'O') {
                 if (i==9) {
                     char draw = 'D';
-                    System.out.println("Game is a draw");
+                    System.out.println("Game is a draw.");
                     return draw;
                 }
 
