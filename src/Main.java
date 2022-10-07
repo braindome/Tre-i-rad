@@ -23,6 +23,7 @@ public class Main {
             //Checking for victory or draw.
 
             if (game.winCondition(board, p1, p2) == 'O') {
+                System.out.println(p2.name + " wins this game.");
                 p2.score = p2.score + 1;
                 System.out.println(p2.name + " score: " + p2.score);
                 if (!game.playAgain()) break;
@@ -30,6 +31,7 @@ public class Main {
             }
 
             if (game.winCondition(board, p1, p2) == 'X') {
+                System.out.println(p1.name + " wins this game.");
                 p1.score = p1.score + 1;
                 System.out.println(p1.name + " score: " + p1.score);
                 if (!game.playAgain()) break;
@@ -37,7 +39,7 @@ public class Main {
             }
 
             if (game.winCondition(board, p1, p2) == 'D') {
-                System.out.println("DRAW");
+                System.out.println("This game is a draw.");
                 if (!game.playAgain()) break;
                 else game.start(players);
             }

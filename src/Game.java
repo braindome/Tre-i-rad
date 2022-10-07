@@ -68,7 +68,7 @@ public class Game {
                     System.out.println("isValidRange: " + isValidInput);
 
                     if(isValidInput) {
-                        //Here is a valid input between 1 to 9
+                        //Here is a valid input between 1 and 9
                         boolean isTaken = isInputTaken(inputPosition);
 
                         if (!isTaken) {
@@ -101,7 +101,7 @@ public class Game {
         if (player1.type.equals("computer") && player2.type.equals("computer")) {
             while (!exitWhileLoop) {
                 int inputPosition = random.nextInt(1,10);
-                System.out.println("computer inputPosition:: " + inputPosition);
+                //System.out.println("computer inputPosition:: " + inputPosition);
                 if (!isInputTaken(inputPosition)) {
                     if (turn == 'X') {
                         printMakeAMove(player2);
@@ -214,8 +214,6 @@ public class Game {
 
         char winner = ' ';
 
-        System.out.println("winCondition - Player 1:: " + player1.toString());
-        System.out.println("winCondition - Player 2:: " + player2.toString());
 
         if (board.positionNumber[1] == 'X' && board.positionNumber[2] == 'X' && board.positionNumber[3] == 'X') winner = 'X';
         if (board.positionNumber[4] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[6] == 'X') winner = 'X';
@@ -227,7 +225,6 @@ public class Game {
         if (board.positionNumber[3] == 'X' && board.positionNumber[5] == 'X' && board.positionNumber[7] == 'X') winner = 'X';
 
         if (winner == 'X') {
-            System.out.println(player1.name + " wins this game.");
             return winner;
 
         }
@@ -246,21 +243,15 @@ public class Game {
 
 
         if (winner == 'O') {
-            System.out.println(player2.name + " wins this game.");
             return winner;
 
         }
 
 
         for (int i = 1; i <= 9; i++) {
-            System.out.println("iteration-" + i);
-            board.printBoard();
-//
             if (board.positionNumber[i] == 'X' || board.positionNumber[i] == 'O') {
                 if (i==9) {
-                    char draw = 'D';
-                    System.out.println("Game is a draw.");
-                    return draw;
+                    return 'D';
                 }
 
             } else break;
